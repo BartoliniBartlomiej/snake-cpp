@@ -1,6 +1,7 @@
 add_executable(snake_tests
     DirectionTest.cpp
     PositionTest.cpp
+    SnakeTest.cpp
 )
 
 target_link_libraries(snake_tests
