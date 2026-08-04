@@ -1,4 +1,5 @@
 add_executable(snake_tests
+    DirectionTest.cpp
     PositionTest.cpp
 )
 
