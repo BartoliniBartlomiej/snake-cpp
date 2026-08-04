@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - snake-movement
   pull_request:
     branches:
       - main
