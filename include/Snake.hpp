@@ -5,6 +5,7 @@
 
 #include <cstddef>
 #include <deque>
+#include <optional>
 
 class Snake {
 public:
@@ -19,10 +20,13 @@ public:
     std::size_t length() const;
     const std::deque<Position>& body() const;
 
+    void grow();
+
 private:
     Position nextHeadPosition() const;
     void advance();
 
     std::deque<Position> body_;
     Direction direction_;
+    std::optional<Position> lastTailPosition_;
 };
