@@ -2,6 +2,8 @@
 
 #include <gtest/gtest.h>
 
+#include <stdexcept>
+
 TEST(SnakeTest, StartsAtGivenPositionAndDirection) {
     const Snake snake{{15, 15}, Direction::Right};
 
@@ -58,4 +60,33 @@ TEST(SnakeTest, TurnsRightAndMovesByOneField) {
 
     EXPECT_EQ(snake.direction(), Direction::Right);
     EXPECT_EQ(snake.head(), Position(16, 15));
+}
+
+TEST(SnakeTest, GrowsAfterMoving) {
+    Snake snake{{15, 15}, Direction::Right};
+
+    snake.moveForward();
+    snake.grow();
+
+    ASSERT_EQ(snake.length(), 2);
+    EXPECT_EQ(snake.body().front(), Position(16, 15));
+    EXPECT_EQ(snake.body().back(), Position(15, 15));
+}
+
+TEST(SnakeTest, KeepsNewLengthDuringNextMovement) {
+    Snake snake{{15, 15}, Direction::Right};
+
+    snake.moveForward();
+    snake.grow();
+    snake.moveForward();
+
+    ASSERT_EQ(snake.length(), 2);
+    EXPECT_EQ(snake.body().front(), Position(17, 15));
+    EXPECT_EQ(snake.body().back(), Position(16, 15));
+}
+
+TEST(SnakeTest, CannotGrowBeforeMoving) {
+    Snake snake{{15, 15}, Direction::Right};
+
+    EXPECT_THROW(snake.grow(), std::logic_error);
 }

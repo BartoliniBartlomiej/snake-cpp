@@ -55,6 +55,17 @@ Position Snake::nextHeadPosition() const {
 }
 
 void Snake::advance() {
+    lastTailPosition_ = body_.back();
+
     body_.push_front(nextHeadPosition());
     body_.pop_back();
+}
+
+void Snake::grow() {
+    if (!lastTailPosition_.has_value()) {
+        throw std::logic_error{"Snake cannot grow before moving"};
+    }
+
+    body_.push_back(*lastTailPosition_);
+    lastTailPosition_.reset();
 }
