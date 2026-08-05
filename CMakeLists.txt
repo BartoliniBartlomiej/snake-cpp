@@ -13,6 +13,7 @@ add_library(snake_core
     src/Position.cpp
     src/Direction.cpp
     src/Snake.cpp
+    src/Board.cpp
 )
 
 target_include_directories(snake_core
