@@ -3,6 +3,7 @@ add_executable(snake_tests
     PositionTest.cpp
     SnakeTest.cpp
     BoardTest.cpp
+    GameTest.cpp
 )
 
 target_link_libraries(snake_tests

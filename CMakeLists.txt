@@ -14,7 +14,8 @@ add_library(snake_core
     src/Direction.cpp
     src/Snake.cpp
     src/Board.cpp
-)
+    src/Game.cpp
+    )
 
 target_include_directories(snake_core
     PUBLIC
