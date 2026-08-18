@@ -20,6 +20,8 @@ public:
     std::size_t length() const;
     const std::deque<Position>& body() const;
 
+    bool hasSelfCollision() const;
+
     void grow();
 
 private:

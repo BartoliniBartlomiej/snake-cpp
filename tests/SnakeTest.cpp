@@ -90,3 +90,36 @@ TEST(SnakeTest, CannotGrowBeforeMoving) {
 
     EXPECT_THROW(snake.grow(), std::logic_error);
 }
+
+TEST(SnakeTest, HasNoSelfCollisionWhenHeadDoesNotOverlapBody) {
+    Snake snake{{15, 15}, Direction::Right};
+
+    snake.moveForward();
+    snake.grow();
+    snake.moveForward();
+
+    EXPECT_FALSE(snake.hasSelfCollision());
+}
+
+TEST(SnakeTest, DetectsSelfCollisionWhenHeadOverlapsBody) {
+    Snake snake{{15, 15}, Direction::Right};
+
+    snake.moveForward();
+    snake.grow();
+
+    snake.moveForward();
+    snake.grow();
+
+    snake.moveForward();
+    snake.grow();
+
+    snake.moveRight();
+    snake.grow();
+
+    snake.moveRight();
+    snake.grow();
+
+    snake.moveRight();
+
+    EXPECT_TRUE(snake.hasSelfCollision());
+}
