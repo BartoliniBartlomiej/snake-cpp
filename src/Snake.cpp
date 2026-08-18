@@ -1,6 +1,7 @@
 #include "Snake.hpp"
 
 #include <stdexcept>
+#include <iterator>
 
 Snake::Snake(Position initialPosition, Direction initialDirection)
     : body_{initialPosition},
@@ -68,4 +69,16 @@ void Snake::grow() {
 
     body_.push_back(*lastTailPosition_);
     lastTailPosition_.reset();
+}
+
+bool Snake::hasSelfCollision() const {
+    const Position& currentHead = head();
+
+    for (auto it = std::next(body_.begin()); it != body_.end(); ++it) {
+        if (*it == currentHead) {
+            return true;
+        }
+    }
+
+    return false;
 }
