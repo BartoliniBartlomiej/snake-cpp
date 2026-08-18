@@ -47,3 +47,29 @@ TEST(GameTest, EndsWhenSnakeMovesOutsideBottomBoundary) {
 
     EXPECT_TRUE(game.isGameOver());
 }
+
+TEST(GameTest, MovesSnakeLeft) {
+    Game game{{15, 15}, Direction::Up};
+
+    game.moveLeft();
+
+    EXPECT_EQ(game.snake().direction(), Direction::Left);
+    EXPECT_EQ(game.snake().head(), Position(14, 15));
+}
+
+TEST(GameTest, MovesSnakeRight) {
+    Game game{{15, 15}, Direction::Up};
+
+    game.moveRight();
+
+    EXPECT_EQ(game.snake().direction(), Direction::Right);
+    EXPECT_EQ(game.snake().head(), Position(16, 15));
+}
+
+TEST(GameTest, EndsWhenSnakeTurnsIntoWall) {
+    Game game{{0, 15}, Direction::Up};
+
+    game.moveLeft();
+
+    EXPECT_TRUE(game.isGameOver());
+}
