@@ -126,3 +126,29 @@ TEST_F(GameTest, GeneratesNewFruitAfterSnakeEatsFruit) {
 
     EXPECT_EQ(game.fruit(), Position(20, 20));
 }
+
+TEST_F(GameTest, EndsWhenSnakeCollidesWithItself) {
+    Game game{
+        {15, 15},
+        Direction::Right,
+        {16, 15},
+        fruitGenerator
+    };
+
+    EXPECT_CALL(fruitGenerator, generate(testing::_, testing::_))
+        .WillOnce(testing::Return(Position{17, 15}))
+        .WillOnce(testing::Return(Position{18, 15}))
+        .WillOnce(testing::Return(Position{18, 16}))
+        .WillOnce(testing::Return(Position{17, 16}))
+        .WillOnce(testing::Return(Position{16, 16}));
+
+    game.moveForward();
+    game.moveForward();
+    game.moveForward();
+
+    game.moveRight();
+    game.moveRight();
+    game.moveRight();
+
+    EXPECT_TRUE(game.isGameOver());
+}

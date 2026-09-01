@@ -12,6 +12,12 @@ Game::Game(Position initialSnakePosition,
 void Game::updateGameState() {
     if (!board_.isInside(snake_.head())) {
         gameOver_ = true;
+        return;
+    }
+
+    if (snake_.hasSelfCollision()) {
+        gameOver_ = true;
+        return;
     }
 
     if (snake_.head() == fruit_) {
