@@ -20,6 +20,7 @@ add_library(snake_core
     src/BoardRenderer.cpp
     src/InputParser.cpp
     src/GameController.cpp
+    src/TerminalInput.cpp
     )
 
 target_include_directories(snake_core
