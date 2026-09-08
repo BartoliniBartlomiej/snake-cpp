@@ -6,7 +6,7 @@
 
 class Game {
 public:
-    Game(Position initialSnakePosition, Direction initialDirection, Position initialFruitPosition, FruitGenerator& fruitGenerator);
+    Game(Position initialSnakePosition, Direction initialDirection, FruitGenerator& fruitGenerator);
 
     void moveForward();
     void moveLeft();

@@ -18,15 +18,16 @@ public:
 TEST(BoardRendererTest, RendersSnakeAndFruit) {
     testing::StrictMock<MockFruitGenerator> fruitGenerator;
 
-    const Game game{
+    EXPECT_CALL(fruitGenerator, generate(testing::_, testing::_))
+        .WillOnce(testing::Return(Position{20, 20}));
+
+    Game game{
         {15, 15},
         Direction::Right,
-        {20, 10},
         fruitGenerator
     };
 
     const BoardRenderer renderer;
-
     const std::string output = renderer.render(game);
 
     EXPECT_NE(output.find('S'), std::string::npos);
@@ -36,10 +37,12 @@ TEST(BoardRendererTest, RendersSnakeAndFruit) {
 TEST(BoardRendererTest, RendersBoardWithCorrectDimensions) {
     testing::StrictMock<MockFruitGenerator> fruitGenerator;
 
-    const Game game{
+    EXPECT_CALL(fruitGenerator, generate(testing::_, testing::_))
+        .WillOnce(testing::Return(Position{20, 20}));
+
+    Game game{
         {15, 15},
         Direction::Right,
-        {20, 10},
         fruitGenerator
     };
 
@@ -55,10 +58,12 @@ TEST(BoardRendererTest, RendersBoardWithCorrectDimensions) {
 TEST(BoardRendererTest, RendersEveryLineWithCorrectWidth) {
     testing::StrictMock<MockFruitGenerator> fruitGenerator;
 
-    const Game game{
+    EXPECT_CALL(fruitGenerator, generate(testing::_, testing::_))
+        .WillOnce(testing::Return(Position{20, 20}));
+
+    Game game{
         {15, 15},
         Direction::Right,
-        {20, 10},
         fruitGenerator
     };
 
@@ -76,10 +81,12 @@ TEST(BoardRendererTest, RendersEveryLineWithCorrectWidth) {
 TEST(BoardRendererTest, RendersObjectsAtCorrectPositions) {
     testing::StrictMock<MockFruitGenerator> fruitGenerator;
 
-    const Game game{
-        {2, 3},
+    EXPECT_CALL(fruitGenerator, generate(testing::_, testing::_))
+        .WillOnce(testing::Return(Position{20, 20}));
+
+    Game game{
+        {15, 15},
         Direction::Right,
-        {5, 7},
         fruitGenerator
     };
 
@@ -89,24 +96,30 @@ TEST(BoardRendererTest, RendersObjectsAtCorrectPositions) {
     std::istringstream stream{output};
     std::string line;
 
-    for (int y = -1; std::getline(stream, line); ++y) {
-        if (y == 3) {
-            EXPECT_EQ(line[3], 'S');
+    int lineIndex = 0;
+
+    while (std::getline(stream, line)) {
+        if (lineIndex == 16) {
+            EXPECT_EQ(line[16], 'S');
         }
 
-        if (y == 7) {
-            EXPECT_EQ(line[6], 'F');
+        if (lineIndex == 21) {
+            EXPECT_EQ(line[21], 'F');
         }
+
+        ++lineIndex;
     }
 }
 
 TEST(BoardRendererTest, RendersEntireSnakeBody) {
     testing::StrictMock<MockFruitGenerator> fruitGenerator;
 
+    EXPECT_CALL(fruitGenerator, generate(testing::_, testing::_))
+        .WillOnce(testing::Return(Position{16, 15}));
+
     Game game{
         {15, 15},
         Direction::Right,
-        {16, 15},
         fruitGenerator
     };
 

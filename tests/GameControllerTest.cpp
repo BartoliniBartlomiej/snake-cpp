@@ -19,10 +19,12 @@ protected:
 };
 
 TEST_F(GameControllerTest, MovesGameForward) {
+    EXPECT_CALL(fruitGenerator, generate(testing::_, testing::_))
+        .WillOnce(testing::Return(Position{5, 5}));
+
     Game game{
         {15, 15},
         Direction::Right,
-        {5, 5},
         fruitGenerator
     };
 
@@ -32,10 +34,12 @@ TEST_F(GameControllerTest, MovesGameForward) {
 }
 
 TEST_F(GameControllerTest, TurnsGameLeft) {
+    EXPECT_CALL(fruitGenerator, generate(testing::_, testing::_))
+        .WillOnce(testing::Return(Position{5, 5}));
+
     Game game{
         {15, 15},
         Direction::Up,
-        {5, 5},
         fruitGenerator
     };
 
@@ -46,10 +50,12 @@ TEST_F(GameControllerTest, TurnsGameLeft) {
 }
 
 TEST_F(GameControllerTest, TurnsGameRight) {
+    EXPECT_CALL(fruitGenerator, generate(testing::_, testing::_))
+        .WillOnce(testing::Return(Position{5, 5}));
+
     Game game{
         {15, 15},
         Direction::Up,
-        {5, 5},
         fruitGenerator
     };
 
@@ -60,10 +66,12 @@ TEST_F(GameControllerTest, TurnsGameRight) {
 }
 
 TEST_F(GameControllerTest, DoesNotMoveGameForDisplayCommand) {
+    EXPECT_CALL(fruitGenerator, generate(testing::_, testing::_))
+        .WillOnce(testing::Return(Position{5, 5}));
+
     Game game{
         {15, 15},
         Direction::Right,
-        {5, 5},
         fruitGenerator
     };
 
@@ -73,10 +81,12 @@ TEST_F(GameControllerTest, DoesNotMoveGameForDisplayCommand) {
 }
 
 TEST_F(GameControllerTest, DoesNotMoveGameForUnknownCommand) {
+    EXPECT_CALL(fruitGenerator, generate(testing::_, testing::_))
+        .WillOnce(testing::Return(Position{5, 5}));
+
     Game game{
         {15, 15},
         Direction::Right,
-        {5, 5},
         fruitGenerator
     };
 

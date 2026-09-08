@@ -2,10 +2,9 @@
 
 Game::Game(Position initialSnakePosition,
            Direction initialDirection,
-           Position initialFruitPosition,
            FruitGenerator& fruitGenerator)
     : snake_{initialSnakePosition, initialDirection},
-      fruit_{initialFruitPosition},
+      fruit_{fruitGenerator.generate(board_, snake_)},
       fruitGenerator_{fruitGenerator} {
 }
 
