@@ -18,6 +18,8 @@ add_library(snake_core
     src/FruitGenerator.cpp
     src/RandomFruitGenerator.cpp
     src/BoardRenderer.cpp
+    src/InputParser.cpp
+    src/GameController.cpp
     )
 
 target_include_directories(snake_core

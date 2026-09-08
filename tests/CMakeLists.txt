@@ -6,6 +6,8 @@ add_executable(snake_tests
     GameTest.cpp
     RandomFruitGeneratorTest.cpp
     BoardRendererTest.cpp
+    InputParserTest.cpp
+    GameControllerTest.cpp
 )
 
 target_link_libraries(snake_tests
