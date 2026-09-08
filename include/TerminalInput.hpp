@@ -11,4 +11,5 @@ public:
 
 private:
     termios originalSettings_{};
+    bool terminalConfigured_{false};
 };
