@@ -4,21 +4,26 @@
 #include <unistd.h>
 
 TerminalInput::TerminalInput() {
-    tcgetattr(STDIN_FILENO, &originalSettings_);
+    if (tcgetattr(STDIN_FILENO, &originalSettings_) != 0) {
+        return;
+    }
 
     termios rawSettings = originalSettings_;
-
     rawSettings.c_lflag &= static_cast<tcflag_t>(~(ICANON | ECHO));
 
-    tcsetattr(STDIN_FILENO, TCSANOW, &rawSettings);
+    if (tcsetattr(STDIN_FILENO, TCSANOW, &rawSettings) == 0) {
+        terminalConfigured_ = true;
+    }
 }
 
 TerminalInput::~TerminalInput() {
-    tcsetattr(STDIN_FILENO, TCSANOW, &originalSettings_);
+    if (terminalConfigured_) {
+        tcsetattr(STDIN_FILENO, TCSANOW, &originalSettings_);
+    }
 }
 
 char TerminalInput::readKey() const {
-    char input;
+    char input{};
     std::cin.get(input);
     return input;
 }
